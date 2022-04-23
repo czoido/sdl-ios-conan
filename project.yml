@@ -1,0 +1,51 @@
+name: MyGame
+
+options:
+  bundleIdPrefix: io.github.czoido
+  createIntermediateGroups: true
+  usesTabs: false
+  indentWidth: 4
+  tabWidth: 4
+  deploymentTarget:
+    iOS: "9.0"
+
+settings:
+  CLANG_CXX_LANGUAGE_STANDARD: c++17
+  CLANG_CXX_LIBRARY: libc++
+  GCC_C_LANGUAGE_STANDARD: c11
+  CLANG_WARN_DOCUMENTATION_COMMENTS: false
+
+fileGroups:
+  - conan
+
+configFiles:
+  Debug: conan/conan_config.xcconfig
+  Release: conan/conan_config.xcconfig
+
+targets:
+  MyGame:
+    type: application
+    platform: iOS
+    info:
+      path: Generated/Info.plist
+      properties:
+        LSRequiresIPhoneOS: true
+        UIRequiredDeviceCapabilities: [armv8]
+        UIRequiresFullScreen: true
+        UIStatusBarHidden: true
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+        UILaunchStoryboardName: LaunchScreen
+    entitlements:
+      path: Generated/app.entitlements
+    sources:
+      - src
+      - LaunchScreen.storyboard
+      - path: assets
+        type: folder
+        buildPhase: resources
+    configFiles:
+      Debug: conan/conan_config.xcconfig
+      Release: conan/conan_config.xcconfig
+    dependencies:
+      - sdk: CoreServices.framework
+      - sdk: ImageIO.framework

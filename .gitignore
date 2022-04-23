@@ -1,0 +1,4 @@
+conan/*
+Generated/*
+.DS_Store
+MyGame.xcodeproj/*
